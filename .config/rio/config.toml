@@ -1,0 +1,14 @@
+editor = 'nvim'
+cursor = '▇'
+
+blinking-cursor = true
+
+theme = "catppuccin-latte"
+
+option-as-alt = 'left'
+
+working-dir = "/Users/pyurkovi/Documents/projects/"
+[fonts]
+family = "Dank Mono"
+size = 13
+
