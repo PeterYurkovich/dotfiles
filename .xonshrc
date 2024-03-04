@@ -1,0 +1,34 @@
+xontrib load template_functions aws_functions
+# XONSH WEBCONFIG START
+$XONSH_COLOR_STYLE = 'autumn'
+# XONSH WEBCONFIG END
+#
+
+execx($(starship init xonsh))
+execx($(atuin init xonsh))
+execx($(zoxide init xonsh --cmd cd), 'exec', __xonsh__.ctx, filename='zoxide')
+
+if (len($(tmux ls)) == 0):
+  tmux new-session -A -s mac
+
+aliases['ls'] = 'lsd'
+aliases['ll'] = 'ls -l'
+aliases['la'] = 'ls -a'
+aliases['lla'] = 'ls -la'
+aliases['lt'] = 'ls --tree --depth 2'
+
+aliases['docker'] = 'podman'
+
+aliases['tm'] = 'tmux'
+aliases['tma'] = 'tmux attach'
+
+aliases['vim'] = 'nvim'
+aliases['k'] = 'kubectl'
+
+$KUBE_EDITOR = 'nvim'
+$KREW_ROOT = $HOME + './krew'
+$AWS_PROFILE = 'openshift-dev'
+$PREFER_PODMAN = '1'
+
+
+$PATH.append($HOME + './krew')
