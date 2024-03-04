@@ -1,3 +1,8 @@
 *
 !README.md
 !.gitignore
+!.xonshrc
+!/.config/atuin/config.toml
+!/.config/rio/config.toml
+!/.config/tmux/tmux.conf
+!/.config/starship.toml
