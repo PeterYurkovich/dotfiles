@@ -6,7 +6,7 @@ def oc_connect(connection_string = ''):
     connection_string = $(pbpaste)
   if connection_string == '':
     print("Connection string not provided and not in clipboard")
-    return
+    return False
 
   splits = connection_string.split()
   
@@ -26,6 +26,8 @@ def oc_connect(connection_string = ''):
 
   oc_login_command = f"oc login {login_url} -u kubeadmin -p {password}"
   oc login @(login_url) -u kubeadmin -p @(password)
+  $(echo @(password.rstrip()) | pbcopy)
+  return True
 
 def get_bucket_names():
   buckets = $(aws s3api list-buckets --output text --no-paginate).splitlines()
