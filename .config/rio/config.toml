@@ -7,8 +7,7 @@ theme = "catppuccin-latte"
 
 option-as-alt = 'left'
 
-working-dir = "/Users/pyurkovi/Documents/projects/"
+working-dir = "/Users/pyurkovi/"
 [fonts]
 family = "Dank Mono"
 size = 13
-

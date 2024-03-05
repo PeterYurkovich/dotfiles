@@ -1,6 +1,6 @@
 $PATH.append($HOME)
-xontrib load local_scripts.aws_functions
-xontrib load local_scripts.template_functions
+xontrib load aws_functions
+xontrib load template_functions
 xontrib load vox
 # XONSH WEBCONFIG START
 $XONSH_COLOR_STYLE = 'autumn'

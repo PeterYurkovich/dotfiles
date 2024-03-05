@@ -7,11 +7,10 @@
 !/.config/tmux/tmux.conf
 !/.config/starship.toml
 
-!/yaml/
-!/yaml/*
-!/yaml/tempo/**/*
-!/yaml/templates/**/*
-!/yaml/derivatives/**/*
-
-!aws_functions.xsh
-!template_functions.xsh
+!/xontrib
+!/xontrib/*
+!/xontrib/yaml/
+!/xontrib/yaml/*
+!/xontrib/yaml/tempo/**/*
+!/xontrib/yaml/templates/**/*
+!/xontrib/yaml/derivatives/**/*
