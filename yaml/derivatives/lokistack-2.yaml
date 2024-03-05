@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-logging-two
+---
+apiVersion: loki.grafana.com/v1
+kind: LokiStack
+metadata:
+  name: lokistack-sample-two
+  namespace: openshift-logging-two
+spec:
+  tenants:
+    mode: openshift-logging
+  managementState: Managed
+  limits:
+    global:
+      queries:
+        queryTimeout: 1m
+  storage:
+    schemas:
+      - effectiveDate: "2020-10-11"
+        version: v11
+    secret:
+      name: secret-two
+      type: s3
+  size: 1x.extra-small
+  storageClassName: gp2-csi

@@ -1,0 +1,43 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  labels:
+    console.openshift.io/dashboard: 'true'
+    console.openshift.io/odc-dashboard: 'true'
+  name: world-dashboard
+  namespace: openshift-config-managed
+data:
+  etcd.json: |-
+    {
+      "description": "Test Dashboard to load in the hello world metric",
+      "editable": true,
+      "gnetId": null,
+      "hideControls": false,
+      "refresh": "10s",
+      "panels": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "targets": [
+            {
+              "expr": "test_application_hellos"
+            }
+          ],
+          "title": "Worlds Helloed",
+          "type": "singlestat"
+        },
+        {
+          "legend": {
+            "show": true
+          },
+          "stack": true,
+          "targets": [
+            {
+              "expr": "test_application_hellos"
+            }
+          ],
+          "title": "Helloes Over Time",
+          "type": "graph"
+        }
+      ]
+    }

@@ -6,3 +6,12 @@
 !/.config/rio/config.toml
 !/.config/tmux/tmux.conf
 !/.config/starship.toml
+
+!/yaml/
+!/yaml/*
+!/yaml/tempo/**/*
+!/yaml/templates/**/*
+!/yaml/derivatives/**/*
+
+!aws_functions.xsh
+!template_functions.xsh

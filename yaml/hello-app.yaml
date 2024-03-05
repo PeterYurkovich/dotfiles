@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: three
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: three-app
+  name: three-app
+  namespace: three
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: three-app
+  template:
+    metadata:
+      labels:
+        app: three-app
+    spec:
+      containers:
+      - image: quay.io/rh-ee-pyurkovi/go-repo-test-three
+        imagePullPolicy: IfNotPresent
+        name: three-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: three-app
+  name: three-app
+  namespace: three
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: web
+  selector:
+    app: three-app
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: three-monitor
+  name: three-monitor
+  namespace: three
+spec:
+  endpoints:
+  - interval: 30s
+    port: web
+    scheme: http
+  selector:
+    matchLabels:
+      app: three-app
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: three-alert
+  namespace: three
+spec:
+  groups:
+  - name: three-alert
+    rules:
+    - alert: ThreeAlert
+      expr: test_application_hellos{job="three-app"} - test_application_hellos{job="three-app",namespace="three"} offset 5m > 2
+      labels:
+        severity: critical

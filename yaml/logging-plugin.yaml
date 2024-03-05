@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logging-view-plugin-config
+  namespace: openshift-logging
+  labels:
+    app: logging-view-plugin
+    app.kubernetes.io/part-of: logging-view-plugin
+data:
+  config.yaml: |-
+    logsLimit: 200
+    timeout: '60s'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-view-plugin
+  namespace: openshift-logging
+  labels:
+    app: logging-view-plugin
+    app.kubernetes.io/component: logging-view-plugin
+    app.kubernetes.io/instance: logging-view-plugin
+    app.kubernetes.io/part-of: logging-view-plugin
+    app.openshift.io/runtime-namespace: openshift-logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logging-view-plugin
+  template:
+    metadata:
+      labels:
+        app: logging-view-plugin
+    spec:
+      containers:
+        - name: logging-view-plugin
+          image: "quay.io/rh-ee-pyurkovi/logging-view-plugin:latest"
+          args:
+            - "-plugin-config-path"
+            - "/etc/plugin/config.yaml"
+          volumeMounts:
+            - name: plugin-config
+              readOnly: true
+              mountPath: /etc/plugin/config.yaml
+              subPath: config.yaml

@@ -1,0 +1,24 @@
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoStack
+metadata:
+  name: tempo-one
+  namespace: openshift-tempo-operator
+spec:
+  storageSize: 1Gi
+  storage:
+    secret:
+      name: tempo-secret-one
+      type: s3
+  resources:
+    total:
+      limits:
+        memory: 2Gi
+        cpu: 2000m
+  template:
+    queryFrontend:
+      jaegerQuery:
+        enabled: true
+        ingress:
+          route:
+            termination: edge
+          type: route
