@@ -27,6 +27,7 @@ def oc_connect(connection_string = ''):
   oc_login_command = f"oc login {login_url} -u kubeadmin -p {password}"
   oc login @(login_url) -u kubeadmin -p @(password)
   $(echo @(password.rstrip()) | pbcopy)
+  open @(url)
   return True
 
 def get_bucket_names():
