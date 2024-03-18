@@ -13,12 +13,16 @@ def oc_connect(connection_string = ''):
   urls = [x for x in splits if x.startswith("https")]
   if len(urls) == 0:
     print("No URLs present in conneciton string")
-    return
+    return False
+  if 'hypershift' in url:
+    print("Hypershift can't be automatically connected to. Opening Browser")
+    open @(url)
+    return False
   url = urls[0]
   unique_url_segments = url.split("apps.", 1)
   if len(unique_url_segments) < 2:
     print("URL in wrong format")
-    return
+    return False
   unique_url_segment = unique_url_segments[1]
   login_url = f"https://api.{unique_url_segment}:6443"
 
