@@ -3,11 +3,11 @@ cursor = '▇'
 
 blinking-cursor = true
 
-theme = "catppuccin-latte"
+theme = "iceberg"
 
 option-as-alt = 'left'
 
-working-dir = "/Users/pyurkovi/"
+working-dir = "/Users/pyn/"
 [fonts]
 family = "Dank Mono"
 size = 13
