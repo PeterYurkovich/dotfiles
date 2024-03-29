@@ -14,11 +14,11 @@ def oc_connect(connection_string = ''):
   if len(urls) == 0:
     print("No URLs present in conneciton string")
     return False
+  url = urls[0]
   if 'hypershift' in url:
     print("Hypershift can't be automatically connected to. Opening Browser")
     open @(url)
     return False
-  url = urls[0]
   unique_url_segments = url.split("apps.", 1)
   if len(unique_url_segments) < 2:
     print("URL in wrong format")

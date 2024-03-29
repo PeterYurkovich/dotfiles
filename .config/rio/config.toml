@@ -3,7 +3,7 @@ cursor = '▇'
 
 blinking-cursor = true
 
-theme = "catppuccin-latte"
+theme = "vesper"
 
 option-as-alt = 'left'
 

@@ -32,6 +32,6 @@ $KUBE_EDITOR = 'nvim'
 $KREW_ROOT = $HOME + './krew'
 $AWS_PROFILE = 'saml'
 $PREFER_PODMAN = '1'
-
+$NVM_DIR = '$HOME/.nvm'
 
 $PATH.append($HOME + './krew')
