@@ -38,6 +38,8 @@ alias tma='tmux attach'
 
 alias vim='nvim'
 alias k='kubectl'
+alias kaf='kubectl apply -f'
+alias kdf='kubectl delete -f'
 
 eval "$(atuin init bash)"
 eval "$(starship init bash)"
@@ -53,4 +55,5 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 # fnm
 export PATH="/home/pyn/.local/share/fnm:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 eval "`fnm env`"
