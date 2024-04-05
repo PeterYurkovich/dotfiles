@@ -20,6 +20,8 @@ alias tma='tmux attach'
 
 alias k="kubectl"
 
+alias aws='aws --profile saml'
+
 alias vim='nvim'
 export KUBE_EDITOR="nvim"
 

@@ -1,11 +1,36 @@
-#!/bin/bash
+#!/bin/sh
 
 # create a script which checks if we ware logged in with aws, and if not, login
 function check_aws_login() {
-  if [[ aws configure get aws_access_key_id != "" ]]; then
+  if aws configure get aws_access_key_id > /dev/null 2>&1
+  then
+    print -P "\n%F{green}AWS is already logged in%f\n"
     return
   fi
-  (cd ~/Documents/projects/local-copies/aws-automation && source /venv/bin/activate && python aws-saml.py)
+  copy_redhat
+  osascript $HOME/xontrib/viscosity.applescript
+  kdestroy
+  kinit --keychain
+  (cd ~/Documents/projects/local-copies/aws-automation && source venv/bin/activate && python aws-saml.py --region us-east-1)
+}
+
+function authenticate_bitwarden() {
+  if ! bw unlock --check > /dev/null 2>&1
+  then
+    print -P "\n%F{red}Vault is locked.%f\n"
+    print -P "%F{green}Unlocking Bitwarden%f\n"
+    export BW_SESSION="$(bw unlock --raw)"
+  else 
+    print -P "\n%F{green}Vault is already unlocked%f\n"
+  fi
+}
+
+function copy_redhat() {
+  authenticate_bitwarden
+  REDHAT_LOGIN=$(bw get item sso.redhat.com | jq '.login.password' -r)
+  REDHAT_LOGIN+=$(bw get totp sso.redhat.com)
+  echo $REDHAT_LOGIN | pbcopy
+  print -P "\n%F{yellow}Red Hat login copied to clipboard%f\n"
 }
 
 function delete_buckets() {
