@@ -16,11 +16,3 @@ if [ -x "$(command -v zoxide)" ]; then
 fi
 
 source .commonrc
-
-if [[ "$OSTYPE" == "darwin"* ]]
-then
-    export REQUESTS_CA_BUNDLE="$HOME/.mac-ca-roots"
-    tmux new-session -A -s mac
-else
-    tmux new-session -A -s linux
-fi
