@@ -9,10 +9,12 @@
 !.bash-preexec.sh
 !/.config/atuin/config.toml
 !/.config/rio/config.toml
+!/.config/rio/themes/vesper.toml
 !/.config/tmux/tmux.conf
 !/.config/starship.toml
 !/.config/btop/btop.conf
-!/.config/kitty/kitty.conf
+!/.config/kitty/*
+!/.config/kitty/themes/vesper.conf
 
 !/xontrib
 !/xontrib/*
