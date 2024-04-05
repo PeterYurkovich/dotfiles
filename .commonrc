@@ -1,0 +1,32 @@
+if [[ "$OSTYPE" == "darwin"* ]]
+then
+    export REQUESTS_CA_BUNDLE="$HOME/.mac-ca-roots"
+    tmux new-session -A -s mac
+else
+    tmux new-session -A -s linux
+fi
+
+
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -A'
+alias lla='ls -lA'
+alias lt='ls --tree --depth 2'
+
+alias docker='podman'
+
+alias tm='tmux'
+alias tma='tmux attach'
+
+alias k="kubectl"
+
+alias vim='nvim'
+export KUBE_EDITOR="nvim"
+
+export REGISTRY_ORG="rh-ee-pyurkovi"
+export PREFER_PODMAN="1"
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
+
+clear

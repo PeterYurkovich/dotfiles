@@ -2,10 +2,17 @@
 !README.md
 !.gitignore
 !.xonshrc
+!.commonrc
+!.zshrc
+!.bashrc
+!.zprofile
+!.bash-preexec.sh
 !/.config/atuin/config.toml
 !/.config/rio/config.toml
 !/.config/tmux/tmux.conf
 !/.config/starship.toml
+!/.config/btop/btop.conf
+!/.config/kitty/kitty.conf
 
 !/xontrib
 !/xontrib/*
