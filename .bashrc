@@ -55,5 +55,7 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 # fnm
 export PATH="/home/pyn/.local/share/fnm:$PATH"
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 eval "`fnm env`"
