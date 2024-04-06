@@ -7,7 +7,7 @@ theme = "vesper"
 
 option-as-alt = 'left'
 
-working-dir = "/Users/pyurkovi/"
+working-dir = "/Users/pyn/"
 [fonts]
 family = "Dank Mono"
 size = 13

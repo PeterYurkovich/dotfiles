@@ -19,6 +19,8 @@ alias tm='tmux'
 alias tma='tmux attach'
 
 alias k="kubectl"
+alias kaf='kubectl apply -f'
+alias kdf='kubectl delete -f'
 
 alias aws='aws --profile saml'
 
@@ -32,8 +34,21 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+[ -d "$HOME/.bun" ] && export BUN_INSTALL="$HOME/.bun" && export PATH="$BUN_INSTALL/bin:$PATH"
+
+[ -d "$HOME/.local/share/fnm" ] && export PATH="$HOME/.local/share/fnm:$PATH" && eval "$(fnm env)"
+[ -d "$HOME/go" ] && export GOPATH="$HOME/go" && export PATH="$GOPATH/bin:$PATH" && export PATH=$PATH:/usr/local/go/bin
+
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
 
 clear
