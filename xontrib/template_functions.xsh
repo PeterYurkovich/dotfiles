@@ -104,8 +104,3 @@ def create_tempo_instance(postfix = ''):
     print(f"Failed to create tempostack with name: {tempostack_name}")
     return False
   return True
-
-
-def get_region():
-  region = $(aws configure get region)
-  print(region.rstrip())
