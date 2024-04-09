@@ -69,7 +69,7 @@ function install_tempo() {
   echo "Sleeping for 10 seconds to let the operator load"
   sleep 10
 
-  kaf "$HOME/xontrib/yaml/tempo/subsciption.yaml"
+  kaf "$HOME/xontrib/yaml/tempo/subscription.yaml"
   if [ $? -ne 0 ]; then
     echo "Failed to create operator subscription"
     return 1
@@ -87,10 +87,11 @@ function create_tempo_instance() {
   export AWS_ACCESS_KEY_SECRET=$(aws configure get aws_secret_access_key)
 
   export AWS_BUCKET_NAME="pyurkovi-tempo-$1"
-  export AWS_S3_ENDPOINT="https://s3.$region.amazonaws.com"
+  export AWS_S3_ENDPOINT="https://s3.$AWS_REGION.amazonaws.com"
   export SECRET_NAME="secret-$1"
   export TEMPOSTACK_NAME="tempo-stack-$1"
   NAMESPACE="openshift-tempo-operator"
+
   if [ "$1" != "one" ]; then
     NAMESPACE+="-" + "$1"
     if ! create_namespace "$NAMESPACE"; then
@@ -106,7 +107,7 @@ function create_tempo_instance() {
   temp_file_location="$HOME/xontrib/yaml/tmp/secret-$(date +%s).yaml"
   echo $secret_template | envsubst > $temp_file_location
 
-  if [ $? -ne 0 ]; then echo "Fialed to Create Secrete yaml"; return 1; fi
+  if [ $? -ne 0 ]; then echo "Failed to Create Secrete yaml"; return 1; fi
 
   if ! kaf $temp_file_location; then
     echo "Failed to create secret with name: $SECRET_NAME"
