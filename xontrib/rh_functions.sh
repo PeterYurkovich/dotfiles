@@ -2,16 +2,20 @@
 
 # create a script which checks if we ware logged in with aws, and if not, login
 function check_aws_login() {
-  if [[ $(aws sts get-caller-identity) != *"ExpiredToken"* ]]
+  if aws sts get-caller-identity | grep -q "ExpiredToken"
   then
     print -P "\n%F{green}AWS is already logged in%f\n"
     return
   fi
-  copy_redhat
-  osascript $HOME/xontrib/viscosity.applescript
+  vpn_connect
   kdestroy
   kinit --keychain
   (cd ~/Documents/projects/local-copies/aws-automation && source venv/bin/activate && python aws-saml.py --region us-east-1)
+}
+
+function vpn_connect() {
+  copy_redhat
+  osascript $HOME/xontrib/viscosity.applescript
 }
 
 function authenticate_bitwarden() {
