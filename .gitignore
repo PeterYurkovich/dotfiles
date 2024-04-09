@@ -24,3 +24,9 @@
 !/xontrib/yaml/tempo/**/*
 !/xontrib/yaml/templates/**/*
 !/xontrib/yaml/derivatives/**/*
+!/xontrib/yaml/resource-quota/**/*
+!/xontrib/yaml/passwords/user.yaml
+!/xontrib/yaml/loki/**/*
+!/xontrib/yaml/korrel8r/**/*
+!/xontrib/yaml/kepler/**/*
+!/xontrib/yaml/cluster-logging/**/*

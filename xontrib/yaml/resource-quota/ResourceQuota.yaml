@@ -1,0 +1,9 @@
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: staging-workshop-quota
+spec:
+  hard:
+    limits.cpu: '11'
+    limits.memory: 15Gi
+    pods: '12'
