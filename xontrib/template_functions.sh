@@ -16,21 +16,6 @@ function get_template() {
   cat $template_location
 }
 
-function get_tempo() {
-  template=$(get_template "tempo/templates/tempostack-template.tmpl")
-  if [ $? -ne 0 ]; then echo $template; return 1; fi
-
-  export TEMPOSTACK_NAME="tempo-stack"
-  export NAMESPACE_NAME="openshift-tempo-operator"
-  export SECRET_NAME="secret-one"
-
-  temp_file_location="$HOME/xontrib/yaml/tmp/tempo-$(date +%s).yaml"
-  echo $template | envsubst > $temp_file_location
-  unset TEMPOSTACK_NAME
-  unset NAMESPACE_NAME
-  unset SECRET_NAME
-}
-
 function create_namespace() {
   if [ -z "$1" ]; then
     echo "Must have a namespace name to get"
@@ -100,6 +85,12 @@ function create_tempo_instance() {
     fi
   fi
   export NAMESPACE
+
+  source $HOME/xontrib/rh_functions.sh
+  if ! create_bucket $AWS_BUCKET_NAME $AWS_USERNAME; then
+    echo "Failed to create bucket"
+    return 1
+  fi
 
   secret_template=$(get_template "templates/secret-template.tmpl")
   if [ $? -ne 0 ]; then echo $secret_template; return 1; fi
