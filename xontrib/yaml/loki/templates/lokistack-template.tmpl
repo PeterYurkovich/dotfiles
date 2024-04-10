@@ -1,0 +1,17 @@
+apiVersion: loki.grafana.com/v1
+kind: LokiStack
+metadata:
+  name: $LOKISTACK_NAME
+  namespace: $NAMESPACE
+spec:
+  size: 1x.extra-small
+  storage:
+    schemas:
+    - version: v12
+      effectiveDate: "2022-06-01"
+    secret:
+      name: $SECRET_NAME
+      type: s3
+  storageClassName: gp3-csi
+  tenants:
+    mode: $NAMESPACE

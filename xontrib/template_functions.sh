@@ -87,7 +87,7 @@ function create_tempo_instance() {
   export NAMESPACE
 
   source $HOME/xontrib/rh_functions.sh
-  if ! create_bucket $AWS_BUCKET_NAME $AWS_USERNAME; then
+  if ! create_bucket $AWS_BUCKET_NAME pyurkovi; then
     echo "Failed to create bucket"
     return 1
   fi
@@ -115,6 +115,64 @@ function create_tempo_instance() {
 
   if ! kaf $temp_file_location; then
     echo "Failed to create tempostack with name: $TEMPOSTACK_NAME"
+    return 1
+  fi
+}
+
+
+function install_loki() {
+  kaf "$HOME/xontrib/yaml/loki/subscription.yaml"
+  if [ $? -ne 0 ]; then
+    echo "Failed to create operator subscription"
+    return 1
+  fi
+}
+
+function create_loki_instance() {
+  if [ -z "$1" ]; then
+    echo "Must have specified postfix"
+    return 1
+  fi
+
+  export AWS_REGION=$(aws configure get region)
+  export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
+  export AWS_ACCESS_KEY_SECRET=$(aws configure get aws_secret_access_key)
+
+  export AWS_BUCKET_NAME="pyurkovi-loki-$1"
+  export AWS_S3_ENDPOINT="https://s3.$AWS_REGION.amazonaws.com"
+  export SECRET_NAME="loki-secret-$1"
+  export LOKISTACK_NAME="logging-loki"
+  export NAMESPACE="openshift-logging"
+
+  source $HOME/xontrib/rh_functions.sh
+  if ! create_bucket $AWS_BUCKET_NAME pyurkovi; then
+    echo "Failed to create bucket"
+    return 1
+  fi
+
+  secret_template=$(get_template "templates/secret-template.tmpl")
+  if [ $? -ne 0 ]; then echo $secret_template; return 1; fi
+
+  temp_file_location="$HOME/xontrib/yaml/tmp/secret-$(date +%s).yaml"
+  echo $secret_template | envsubst > $temp_file_location
+
+  if [ $? -ne 0 ]; then echo "Failed to Create Secrete yaml"; return 1; fi
+
+  if ! kaf $temp_file_location; then
+    echo "Failed to create secret with name: $SECRET_NAME"
+    return 1
+  fi
+
+  lokistack_template=$(get_template "loki/templates/lokistack-template.tmpl")
+  if [ $? -ne 0 ]; then echo "Failed to get lokistack template"; return 1; fi
+
+  temp_file_location="$HOME/xontrib/yaml/tmp/lokistack-$(date +%s).yaml"
+  echo $lokistack_template | envsubst > $temp_file_location
+
+  if [ $? -ne 0 ]; then echo "Failed to create lokistack with name: $LOKISTACK_NAME"; return 1; fi
+
+  if ! kaf $temp_file_location; then
+    echo "Failed to create lokistack with name: $LOKISTACK_NAME"
     return 1
   fi
 }
