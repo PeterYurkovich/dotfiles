@@ -65,11 +65,15 @@ function delete_buckets() {
 }
 
 function create_bucket() {
-  check_aws_login
+  if [[ $# -eq 1 ]] && [[ $1 == '-h' ]] || [[ $1 == '--help' ]]; then
+    print -P "\n%F{green}Usage: create_bucket [-h|--help] <bucket_name> <user_name>\n"
+    return
+  fi
   if [[ $# -ne 2 ]]; then
     print -P "\n%F{red}Bucket and User name required to create bucket%f\n"
     return
   fi
+  check_aws_login
   bucket_name=$1
   user_name=$2
   if [[ $bucket_name == "" || $user_name == "" ]]; then
