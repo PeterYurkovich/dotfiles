@@ -3,11 +3,13 @@ kind: ClusterLogging
 metadata:
   name: instance
   namespace: openshift-logging
+  annotations:
+    logging.openshift.io/preview-korrel8r-console: enabled
 spec:
-  collection:
-    type: fluentd
-  logStore:
-    lokistack:
-      name: lokistack-sample
-    type: lokistack
   managementState: Managed
+  collection:
+    type: vector
+  logStore:
+    type: lokistack
+    lokistack:
+      name: logging-loki

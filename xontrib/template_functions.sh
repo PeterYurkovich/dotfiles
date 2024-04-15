@@ -35,17 +35,17 @@ function create_namespace() {
 
   unset NAMESPACE_NAME
 
-  kaf $temp_file_location
+  oc apply -f $temp_file_location
 }
 
 function install_tempo() {
-  kaf "$HOME/xontrib/yaml/tempo/operator-project.yaml"
+  oc apply -f "$HOME/xontrib/yaml/tempo/operator-project.yaml"
   if [ $? -ne 0 ]; then
     echo "Failed to add the operator project"
     return 1
   fi
 
-  kaf "$HOME/xontrib/yaml/tempo/operator-group.yaml"
+  oc apply -f "$HOME/xontrib/yaml/tempo/operator-group.yaml"
   if [ $? -ne 0 ]; then
     echo "Failed to create the operator group"
     return 1
@@ -54,7 +54,7 @@ function install_tempo() {
   echo "Sleeping for 10 seconds to let the operator load"
   sleep 10
 
-  kaf "$HOME/xontrib/yaml/tempo/subscription.yaml"
+  oc apply -f "$HOME/xontrib/yaml/tempo/subscription.yaml"
   if [ $? -ne 0 ]; then
     echo "Failed to create operator subscription"
     return 1
@@ -100,7 +100,7 @@ function create_tempo_instance() {
 
   if [ $? -ne 0 ]; then echo "Failed to Create Secrete yaml"; return 1; fi
 
-  if ! kaf $temp_file_location; then
+  if ! oc apply -f $temp_file_location; then
     echo "Failed to create secret with name: $SECRET_NAME"
     return 1
   fi
@@ -113,15 +113,58 @@ function create_tempo_instance() {
 
   if [ $? -ne 0 ]; then echo "Failed to create tempostack with name: $TEMPOSTACK_NAME"; return 1; fi
 
-  if ! kaf $temp_file_location; then
+  if ! oc apply -f $temp_file_location; then
     echo "Failed to create tempostack with name: $TEMPOSTACK_NAME"
     return 1
   fi
 }
 
+function install_logging() {
+  oc apply -f "$HOME/xontrib/yaml/cluster-logging/operator-project.yaml"
+  if [ $? -ne 0 ]; then
+    echo "Failed to add the operator project"
+    return 1
+  fi
+
+  oc apply -f "$HOME/xontrib/yaml/cluster-logging/operator-group.yaml"
+  if [ $? -ne 0 ]; then
+    echo "Failed to create the operator group"
+    return 1
+  fi
+
+  echo "Sleeping for 10 seconds to let the operator load"
+  sleep 10
+
+  oc apply -f "$HOME/xontrib/yaml/cluster-logging/subscription.yaml"
+  if [ $? -ne 0 ]; then
+    echo "Failed to create operator subscription"
+    return 1
+  fi
+}
+
+function create_logging_instance() {
+  if [ -z "$1" ]; then
+    echo "Must have specified postfix"
+    return 1
+  fi
+
+  oc apply -f "$HOME/xontrib/yaml/cluster-logging/cluster-log-forwarder.yaml"
+  if [ $? -ne 0 ]; then
+    echo "Failed to create cluster log forwarder"
+    return 1
+  fi
+
+  export LOKISTACK_NAME="logging-loki-$1"
+
+  oc apply -f "$HOME/xontrib/yaml/cluster-logging/cluster-logging.yaml"
+  if [ $? -ne 0 ]; then
+    echo "Failed to create cluster logging"
+    return 1
+  fi
+}
 
 function install_loki() {
-  kaf "$HOME/xontrib/yaml/loki/subscription.yaml"
+  oc apply -f "$HOME/xontrib/yaml/loki/subscription.yaml"
   if [ $? -ne 0 ]; then
     echo "Failed to create operator subscription"
     return 1
@@ -158,7 +201,7 @@ function create_loki_instance() {
 
   if [ $? -ne 0 ]; then echo "Failed to Create Secrete yaml"; return 1; fi
 
-  if ! kaf $temp_file_location; then
+  if ! oc apply -f $temp_file_location; then
     echo "Failed to create secret with name: $SECRET_NAME"
     return 1
   fi
@@ -171,7 +214,7 @@ function create_loki_instance() {
 
   if [ $? -ne 0 ]; then echo "Failed to create lokistack with name: $LOKISTACK_NAME"; return 1; fi
 
-  if ! kaf $temp_file_location; then
+  if ! oc apply -f $temp_file_location; then
     echo "Failed to create lokistack with name: $LOKISTACK_NAME"
     return 1
   fi
