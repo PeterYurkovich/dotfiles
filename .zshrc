@@ -13,4 +13,4 @@ if [ -x "$(command -v zoxide)" ]; then
 fi
 
 source $HOME/xontrib/rh_functions.sh
-source .commonrc
+source $HOME/.commonrc
