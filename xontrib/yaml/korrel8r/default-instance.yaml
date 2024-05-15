@@ -3,3 +3,7 @@ kind: Korrel8r
 metadata:
   name: korrel8r
   namespace: korrel8r
+spec:
+  debug:
+    verbose: 1
+

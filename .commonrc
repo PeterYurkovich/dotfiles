@@ -14,8 +14,6 @@ alias la='ls -A'
 alias lla='ls -lA'
 alias lt='ls --tree --depth 2'
 
-alias docker='podman'
-
 alias tm='tmux'
 alias tma='tmux attach'
 
