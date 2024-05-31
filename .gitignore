@@ -16,6 +16,7 @@
 !/.config/kitty/
 !/.config/kitty/*
 !/.config/kitty/themes/vesper.conf
+!/.config/nvim/**/*
 
 !/xontrib
 !/xontrib/*
