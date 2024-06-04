@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: auto-test-metrics-reader-binding
+subjects:
+- kind: User
+  name: pyn
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: auto-test-metrics-reader
+  apiGroup: rbac.authorization.k8s.io
