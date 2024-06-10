@@ -1,0 +1,6 @@
+[allowlist]
+  description = "Global Allowlist"
+
+  paths = [
+    '''xontrib\/yaml\/users\/auth.htpasswd''',
+  ]

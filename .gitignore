@@ -1,6 +1,7 @@
 *
 !README.md
 !.gitignore
+!.gitleaks.toml
 !.xonshrc
 !.commonrc
 !.zshrc
