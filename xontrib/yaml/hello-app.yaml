@@ -68,6 +68,6 @@ spec:
   - name: three-alert
     rules:
     - alert: ThreeAlert
-      expr: test_application_hellos{job="three-app"} - test_application_hellos{job="three-app",namespace="three"} offset 5m > 2
+      expr: test_application_hellos{job="three-app"} > 2
       labels:
         severity: critical
