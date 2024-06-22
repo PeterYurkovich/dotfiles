@@ -89,6 +89,11 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 vim.keymap.set('n', '<C-j>', '<cmd>cnext<CR>', { desc = 'Go to next quick fix list item' })
 vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>', { desc = 'Go to previous quick fix list item' })
+
+-- Keybinds to move a line or selection up and down
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move highlighted code up a line' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move highlighted code down a line' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 -- Highlight when yanking (copying) text
