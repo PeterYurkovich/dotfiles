@@ -43,6 +43,7 @@ export PATH="$PATH:$HOME/.local/bin"
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export TERM="xterm-kitty"
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     export PATH="$HOME/.local/bin:$HOME/bin:$PATH"

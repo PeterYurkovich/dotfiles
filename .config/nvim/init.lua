@@ -62,6 +62,10 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<C-c>')
 
+-- Turn on spellcheck
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -595,6 +599,10 @@ require('lazy').setup({
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
+      vim.cmd.hi 'SpellBad cterm=undercurl gui=undercurl guisp=LightBlue'
+      vim.cmd.hi 'SpellLocal cterm=undercurl gui=undercurl guisp=LightBlue'
+      vim.cmd.hi 'SpellCap cterm=undercurl gui=undercurl guisp=LightBlue'
+      vim.cmd.hi 'SpellRare cterm=undercurl gui=undercurl guisp=LightBlue'
     end,
   },
 
