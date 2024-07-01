@@ -71,3 +71,5 @@ spec:
       expr: test_application_hellos{job="three-app"} > 2
       labels:
         severity: critical
+      annotations:
+        messages: This is an example alert.

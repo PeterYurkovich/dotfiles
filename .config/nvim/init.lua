@@ -107,6 +107,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Set conceallevel for obsidian markdown links
+vim.opt.conceallevel = 1
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -116,8 +119,11 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- Set conceallevel for obsidian markdown links
-vim.opt.conceallevel = 1
+-- Popup behavior
+-- vim.keymap.set('i', '<Tab>', function()
+--   return vim.fn.pumvisible() == 1 and '<c-y>' or '<Tab>'
+-- end, { silent = true, expr = true })
+
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -500,12 +506,12 @@ require('lazy').setup({
           -- },
         },
       },
-      {
-        'supermaven-inc/supermaven-nvim',
-        config = function()
-          require('supermaven-nvim').setup {}
-        end,
-      },
+      -- {
+      --   'supermaven-inc/supermaven-nvim',
+      --   config = function()
+      --     require('supermaven-nvim').setup {}
+      --   end,
+      -- },
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
@@ -580,7 +586,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-          { name = 'supermaven' },
+          -- { name = 'supermaven' },
         },
       }
     end,
@@ -741,13 +747,26 @@ require('lazy').setup({
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    opts = {
-      -- add any options here
-    },
     dependencies = {
       'MunifTanjim/nui.nvim',
       'rcarriga/nvim-notify',
     },
+    config = function()
+      require('noice').setup {
+        routes = {
+          {
+            view = 'notify',
+            filter = { event = 'msg_showmode' },
+          },
+        },
+      }
+    end,
+  },
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end,
   },
   {
     'epwalsh/obsidian.nvim',
