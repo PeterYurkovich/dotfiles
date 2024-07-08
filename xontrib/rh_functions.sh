@@ -7,7 +7,6 @@ function check_aws_login() {
     print -P "\n%F{green}AWS is already logged in%f\n"
     return
   fi
-  vpn_connect
   kdestroy
   kinit --keychain
   (cd ~/Documents/projects/local-copies/aws-automation && source venv/bin/activate && python aws-saml.py --region us-east-1)

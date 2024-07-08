@@ -19,7 +19,8 @@ TLS
 Observability
 RHOBS
 RHEL
-OTel
 codebase
 datasource
 hardcoded
+CMO
+versioning
