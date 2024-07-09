@@ -769,6 +769,9 @@ require('lazy').setup({
       require('Comment').setup()
     end,
   },
+  {
+    'PeterYurkovich/pyn.nvim',
+  },
   -- {
   --   'epwalsh/obsidian.nvim',
   --   version = '*',
