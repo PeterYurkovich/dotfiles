@@ -599,6 +599,12 @@ require('lazy').setup({
     'aktersnurra/no-clown-fiesta.nvim',
   },
   {
+    'sho-87/kanagawa-paper.nvim',
+  },
+  {
+    'dgox16/oldworld.nvim',
+  },
+  {
     'datsfilipe/vesper.nvim',
     priority = 1000,
     init = function()
