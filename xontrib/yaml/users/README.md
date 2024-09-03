@@ -1,19 +1,42 @@
-# Htpasswd
+# Create User
 
-This directory contains the basic htpasswd setup for peter and pyn with a password of `password`.
+This directory contains the basic htpasswd setup for user "user" with a password of `password`.
 
-The `htpasswd` command is used to create a new user and set a password.
+## Using htpasswd
+The `htpasswd` command is used to create and update user and password combinations. 
 
+The following command can be used to create or update a user in the htpasswd file.
 
-## Updating the secret
-To create the secret you can run the following command:
-
-```bash
-oc create secret generic httpass-secret --from-file=htpasswd=auth.htpasswd -n openshift-config
+```
+htpasswd -c -B -b users.htpasswd user password
 ```
 
-or you can update the `secret.yaml` file in this directory by base64 encoding the auth.htpasswd file and adding it as the final parameter in the `secret.yaml` file.
+## OpenShift
+To use the generated htpasswd file to authenticate a user, you need to add the file as a secret then let the OpenShift know that it should use it for login.
+
+### Adding the secret
+First the updated htpasswd file needs to be added to the secret. It expects a base64 encoded string, so run the following command:
 
 ```bash
-base64 auth.htpasswd
+base64 users.htpasswd
 ```
+
+Then copy the output and put it in `secret.yaml` as the final parameter. Then add that secret into OpenShift using:
+
+```bash
+oc apply -f secret.yaml
+```
+
+Alternatively, you can directly pass in the htpasswd file rather than manually updating the secret:
+
+```bash
+oc create secret generic httpass-secret --from-file=htpasswd=users.htpasswd -n openshift-config
+```
+
+### Using the secret
+Apply the oauth configuration file:
+
+```bash
+oc apply -f htpasswd.yaml
+```
+

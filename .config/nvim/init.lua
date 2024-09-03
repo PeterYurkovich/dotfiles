@@ -95,6 +95,13 @@ vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>', { desc = 'Go to previous quick fi
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move highlighted code up a line' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move highlighted code down a line' })
 
+-- Hinds to set underlining strategie
+--
+vim.cmd.hi 'SpellBad cterm=undercurl gui=undercurl guisp=LightBlue'
+vim.cmd.hi 'SpellLocal cterm=undercurl gui=undercurl guisp=LightBlue'
+vim.cmd.hi 'SpellCap cterm=undercurl gui=undercurl guisp=LightBlue'
+vim.cmd.hi 'SpellRare cterm=undercurl gui=undercurl guisp=LightBlue'
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 -- Highlight when yanking (copying) text
@@ -109,6 +116,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Set conceallevel for obsidian markdown links
 vim.opt.conceallevel = 1
+
+-- Turn linebreak on
+vim.opt.linebreak = true
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -182,6 +192,7 @@ require('lazy').setup({
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'andrew-george/telescope-themes' },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -226,6 +237,7 @@ require('lazy').setup({
       -- enable telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension 'themes')
 
       -- see `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -591,21 +603,16 @@ require('lazy').setup({
   },
   {
     'sho-87/kanagawa-paper.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'kanagawa-paper'
+    end,
   },
   {
     'dgox16/oldworld.nvim',
   },
   {
     'datsfilipe/vesper.nvim',
-    priority = 1000,
-    init = function()
-      -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-      vim.cmd.colorscheme 'vesper'
-      vim.cmd.hi 'SpellBad cterm=undercurl gui=undercurl guisp=LightBlue'
-      vim.cmd.hi 'SpellLocal cterm=undercurl gui=undercurl guisp=LightBlue'
-      vim.cmd.hi 'SpellCap cterm=undercurl gui=undercurl guisp=LightBlue'
-      vim.cmd.hi 'SpellRare cterm=undercurl gui=undercurl guisp=LightBlue'
-    end,
   },
 
   {
