@@ -32,3 +32,5 @@
 !/xontrib/yaml/korrel8r/**/*
 !/xontrib/yaml/kepler/**/*
 !/xontrib/yaml/cluster-logging/**/*
+!/xontrib/yaml/cluster-monitoring/**/*
+!/xontrib/yaml/coo/**/*
