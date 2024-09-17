@@ -11,4 +11,4 @@ stow nvim
 stow starship
 stow tmux
 stow xonsh
-stow zshrc
+stow zsh
