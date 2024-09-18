@@ -48,3 +48,8 @@ LogQL
 UIPlugins
 Podman
 virtualization
+querier
+thanos
+CRD
+AlertManager
+productized
