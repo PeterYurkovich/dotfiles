@@ -39,6 +39,7 @@ export PATH="$PATH:$HOME/.local/bin"
 
 [ -d "$HOME/.local/share/fnm" ] && export PATH="$HOME/.local/share/fnm:$PATH" && eval "$(fnm env)"
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go" && export PATH="$GOPATH/bin:$PATH" && export PATH=$PATH:/usr/local/go/bin
+[ -d "$HOME/.atuin/" ] && export PATH=$PATH:$HOME/.atuin/bin
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
