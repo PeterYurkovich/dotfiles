@@ -1,0 +1,71 @@
+- name: DevelopmentSetup
+  hosts: localhost
+  connection: local
+  vars:
+    # This variable gives us a boolean for deciding whether or not to become
+    # root. It cascades down to any subsequent tasks unless overwritten.
+    should_be_root:  "{{ true if ansible_pkg_mgr != 'brew' else false }}"
+
+  tasks:
+    - block:
+      - name: Download atuin installer
+        get_url: 
+          url: https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh
+          dest: ./atuin-installer.sh
+      - name: Allow the atuin installer to execute
+        shell: chmod +x atuin-installer.sh
+      - name: Execute the atuin installer
+        shell: ./atuin-installer.sh
+      - name: Remove the atuin installer
+        file: 
+          path: ./atuin-installer.sh 
+          state: absent
+      - name: lsd is present
+        package:
+          name: lsd
+          state: present
+
+    # atuin
+    # awscli
+    # btop
+    # colima (for docker backend on mac)
+    # docker (cli only)
+    # docker-compose
+    # fzf
+    # gcc
+    # glab
+    # gnu-sed (mac only)
+    # helm
+    # jpeg-turbo
+    # jq
+    # kind
+    # kitty
+    # kubernetes-cli
+    # kustomize
+    # lazygit
+    # lsd
+    # luajit
+    # neovim
+    # nvim (plugins)
+    # nvm
+    # openshift-cli
+    # operator-sdk
+    # pipx (maybe)
+    # pixman (maybe)
+    # podman
+    # podman-compose
+    # pyenv
+    # python
+    # qemu (mac only)
+    # ripgrep
+    # starship
+    # stow
+    # tmux
+    # tree-sitter
+    # wget
+    # xonsh
+    # zoxide
+
+    # run the scripts in the dotfiles repo
+    # gitconfig update based on username of account? pyurkovi means redhat email while any other means peteryurkovich1@gmail.com
+    # install python and ansible first?
