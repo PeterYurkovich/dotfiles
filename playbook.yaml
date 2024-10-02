@@ -20,51 +20,114 @@
         file: 
           path: ./atuin-installer.sh 
           state: absent
+      - name: awscli is present
+        package:
+          name: awscli
+          state: present
+      - name: btop is present
+        package:
+          name: btop
+          state: present
+      - name: fzf is present
+        package:
+          name: fzf
+          state: present
+      - name: gcc is present
+        package:
+          name: gcc
+          state: present
+      - name: glab is present
+        package:
+          name: glab
+          state: present
+      - name: helm is present
+        package:
+          name: helm
+          state: present
+      - name: jq is present
+        package:
+          name: jq
+          state: present
+      - name: lazygit is present
+        package:
+          name: lazygit
+          state: present
       - name: lsd is present
         package:
           name: lsd
           state: present
+      - name: luajit is present
+        package:
+          name: luajit
+          state: present
+      # - name: Download nvm installer
+      #   get_url: 
+      #     url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh
+      #     dest: ./nvm-installer.sh
+      # - name: Allow the nvm installer to execute
+      #   shell: chmod +x nvm-installer.sh
+      # - name: Execute the nvm installer
+      #   shell: ./nvm-installer.sh
+      # - name: Remove the nvm installer
+      #   file: 
+      #     path: ./nvm-installer.sh 
+      #     state: absent
+      # - name: Install nvm
+      #   ansible.builtin.shell: >
+      #     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+      - name: ripgrep is present
+        package:
+          name: ripgrep
+          state: present
+      - name: stow is present
+        package:
+          name: stow
+          state: present
+      - name: tmux is present
+        package:
+          name: tmux
+          state: present
 
-    # atuin
-    # awscli
-    # btop
-    # colima (for docker backend on mac)
-    # docker (cli only)
-    # docker-compose
-    # fzf
-    # gcc
-    # glab
-    # gnu-sed (mac only)
-    # helm
-    # jpeg-turbo
-    # jq
-    # kind
-    # kitty
-    # kubernetes-cli
-    # kustomize
-    # lazygit
-    # lsd
-    # luajit
-    # neovim
-    # nvim (plugins)
-    # nvm
-    # openshift-cli
-    # operator-sdk
-    # pipx (maybe)
-    # pixman (maybe)
-    # podman
-    # podman-compose
-    # pyenv
-    # python
-    # qemu (mac only)
-    # ripgrep
-    # starship
-    # stow
-    # tmux
-    # tree-sitter
-    # wget
-    # xonsh
-    # zoxide
+
+    # - [x] atuin
+    # - [x] awscli
+    # - [x] btop
+    # - [ ] colima (for docker backend on mac)
+    # - [ ] docker (cli only)
+    # - [ ] docker-compose
+    # - [x] fzf
+    # - [x] gcc
+    # - [x] glab
+    # - [ ] gnu-sed (mac only)
+    # - [x] helm
+    # - [x] jq
+    # - [ ] kind
+    # - [ ] kitty
+    # - [ ] kubernetes-cli - https://stackoverflow.com/questions/60528766/how-to-install-kubectl-with-ansible
+    # - [ ] kustomize
+    # - [ ] lazygit - needs `sudo dnf copr enable atim/lazygit -y`
+    # - [x] lsd
+    # - [ ] luajit
+    # - [ ] neovim
+    # - [ ] nvim (plugins)
+    # - [ ] nvm
+    # - [ ] openshift-cli
+    # - [ ] operator-sdk
+    # - [ ] pipx (maybe)
+    # - [ ] pixman (maybe)
+    # - [ ] podman
+    # - [ ] podman-compose
+    # - [ ] pyenv
+    # - [ ] python
+    # - [ ] qemu (mac only)
+    # - [x]] ripgrep
+    # - [ ] starship
+    # - [x] stow
+    # - [x] tmux
+    # - [ ] tree-sitter
+    # - [ ] wget
+    # - [ ] xonsh
+    # - [ ] zoxide
 
     # run the scripts in the dotfiles repo
     # gitconfig update based on username of account? pyurkovi means redhat email while any other means peteryurkovich1@gmail.com
