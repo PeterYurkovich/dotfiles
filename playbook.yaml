@@ -99,9 +99,9 @@
         package:
           name: lsd
           state: present
-      - name: luajit is present
+      - name: lua is present
         package:
-          name: luajit
+          name: lua
           state: present
       # - name: Download nvm installer
       #   get_url: 
