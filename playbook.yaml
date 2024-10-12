@@ -25,6 +25,10 @@
         package:
           name: awscli
           state: present
+      - name: bat is present
+        package:
+          name: bat
+          state: present
       - name: btop is present
         package:
           name: btop
