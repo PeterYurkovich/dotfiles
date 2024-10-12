@@ -49,7 +49,12 @@ fi
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export TERM="xterm-kitty"
+if [[ "$OSTYPE" == "darwin"* ]]
+then
+    export TERM="xterm-kitty"
+fi
+
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     export PATH="$HOME/.local/bin:$HOME/bin:$PATH"

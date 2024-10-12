@@ -36,6 +36,12 @@
         package:
           name: gcc
           state: present
+      - name: gh is present
+        package:
+          name: gh
+          state: present
+      - name: set git user info
+        shell: git config --global user.email "peteryurkovich1@gmail.com" && git config --global user.name "PeterYurkovich"
       - name: glab is present
         package:
           name: glab
@@ -48,6 +54,8 @@
         package:
           name: jq
           state: present
+      - name: allow lazygit install
+        shell: sudo dnf copr enable atim/lazygit -y
       - name: lazygit is present
         package:
           name: lazygit
@@ -75,6 +83,12 @@
       # - name: Install nvm
       #   ansible.builtin.shell: >
       #     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+      - name: neovim is present
+        package:
+          name: neovim
+          state: present
+      - name: neovim plugins are present
+        shell: nvim --headless "+Lazy! sync" +qa
       - name: ripgrep is present
         package:
           name: ripgrep
