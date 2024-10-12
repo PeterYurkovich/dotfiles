@@ -43,6 +43,27 @@
         package:
           name: btop
           state: present
+
+
+      - name: check if cargo is installed
+        shell: command -v cargo
+        register: cargo_exists
+        ignore_errors: yes
+      - name: Cargo Download Installer
+        when: cargo_exists is failed
+        get_url:
+          url: https://sh.rustup.rs
+          dest: /tmp/sh.rustup.rs
+          mode: '0755'
+          force: 'yes'
+        tags:
+          - rust
+      - name: install rust/cargo
+        when: cargo_exists is failed
+        shell: /tmp/sh.rustup.rs -y
+        tags:
+          - rust
+
       - name: fzf is present
         package:
           name: fzf
@@ -81,6 +102,8 @@
         shell: rm -f "{{ newest_go_version }}.linux-amd64.tar.gz"
       - name: add local go folder
         shell: mkdir $HOME/go
+
+
       - name: helm is present
         package:
           name: helm
