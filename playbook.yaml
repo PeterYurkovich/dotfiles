@@ -19,17 +19,6 @@
         shell: chmod +x atuin-installer.sh
         tags:
           - atuin
-      - name: Execute the atuin installer
-        shell: ./atuin-installer.sh
-        tags:
-          - atuin
-      - name: Remove the atuin installer
-        file: 
-          path: ./atuin-installer.sh 
-          state: absent
-        tags:
-          - atuin
-
 
       - name: awscli is present
         package:
@@ -102,7 +91,6 @@
         shell: rm -f "{{ newest_go_version }}.linux-amd64.tar.gz"
       - name: add local go folder
         shell: mkdir $HOME/go
-
 
       - name: helm is present
         package:
