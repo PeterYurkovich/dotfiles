@@ -5,6 +5,7 @@
     # This variable gives us a boolean for deciding whether or not to become
     # root. It cascades down to any subsequent tasks unless overwritten.
     should_be_root:  "{{ true if ansible_pkg_mgr != 'brew' else false }}"
+    newest_go_version: "$(curl https://go.dev/VERSION?m=text | head -n1)"
 
   tasks:
     - block:
@@ -46,6 +47,14 @@
         package:
           name: glab
           state: present
+      - name: download most recent go archive
+        shell: wget "https://dl.google.com/go/{{ newest_go_version }}.linux-amd64.tar.gz"
+      - name: extract go archive
+        shell: tar -C /usr/local -xzf "{{ newest_go_version }}.linux-amd64.tar.gz"
+      - name: remove go archive
+        shell: rm -f "{{ newest_go_version }}.linux-amd64.tar.gz"
+      - name: add local go folder
+        shell: mkdir $HOME/go
       - name: helm is present
         package:
           name: helm
