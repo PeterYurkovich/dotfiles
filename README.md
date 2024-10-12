@@ -5,6 +5,12 @@ This repository now uses stow to symlink in all dotfiles due to difficulty in cl
 
 A pure `stow.sh` is provided to just stow the individual items, a `clean.sh` is used to clean out the old files, and a `setup.sh` is provided to tie them together.
 
+## Installation
+To install this repo, run the following command
+```bash
+https://raw.githubusercontent.com/peteryurkovich/dotfiles/main/prepare-development.sh | sh
+```
+
 ## Packages
 These are the common packages I use on my development systems. As of now, I am only concerned with my development environments, and not with anything else. There is potential for a reduced package set size for quick scaling in, but that is a future issue.
 
