@@ -15,3 +15,5 @@ rm -f atuin-installer.sh
 
 gh auth login
 mkdir $HOME/go
+
+exit
