@@ -136,6 +136,10 @@
         package:
           name: tmux
           state: present
+      - name: unzip is present
+        package:
+          name: unzip
+          state: present
 
 
     # - [x] atuin
