@@ -68,7 +68,7 @@
           name: jq
           state: present
       - name: allow lazygit install
-        shell: sudo dnf copr enable atim/lazygit -y
+        shell: dnf copr enable atim/lazygit -y
       - name: lazygit is present
         package:
           name: lazygit
