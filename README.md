@@ -8,7 +8,7 @@ A pure `stow.sh` is provided to just stow the individual items, a `clean.sh` is 
 ## Installation
 To install this repo, run the following command
 ```bash
-https://raw.githubusercontent.com/peteryurkovich/dotfiles/main/prepare-development.sh | sh
+curl https://raw.githubusercontent.com/peteryurkovich/dotfiles/main/prepare-development.sh | sh
 ```
 
 ## Packages
