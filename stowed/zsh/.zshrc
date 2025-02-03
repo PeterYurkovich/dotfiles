@@ -22,3 +22,5 @@ if [ -e $HOME/nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+
+. "$HOME/.atuin/bin/env"

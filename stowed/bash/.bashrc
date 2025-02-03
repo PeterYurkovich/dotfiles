@@ -20,3 +20,8 @@ if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init bash --cmd cd)"
 fi
 
+
+. "$HOME/.atuin/bin/env"
+
+# Added by Radicle.
+export PATH="$PATH:/home/pyn/.radicle/bin"
