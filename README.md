@@ -11,6 +11,13 @@ To install this repo, run the following command
 curl https://raw.githubusercontent.com/peteryurkovich/dotfiles/main/prepare-development.sh | sh
 ```
 
+### Radicle
+To clone this repository on [Radicle](https://radicle.xyz), run:
+
+```sh
+rad clone rad:z3NdN7taPZmLp3g8xp1ag2FS3ktEy
+```
+
 ## Packages
 These are the common packages I use on my development systems. As of now, I am only concerned with my development environments, and not with anything else. There is potential for a reduced package set size for quick scaling in, but that is a future issue.
 
