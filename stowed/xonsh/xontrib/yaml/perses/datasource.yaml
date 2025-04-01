@@ -1,0 +1,12 @@
+apiVersion: perses.dev/v1alpha1
+kind: PersesDatasource
+metadata:
+  name: thanos-querier-datasource
+spec:
+  display:
+    name: "Thanos Querier Datasource"
+  default: true
+  plugin:
+    kind: "PrometheusDatasource"
+    spec:
+      directUrl: "https://console-openshift-console.apps.emurasak-418.qe.devcluster.openshift.com/api/prometheus"
