@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: story-rules
+  namespace: openshift-monitoring
+spec:
+  groups:
+  - name: alerting rules
+    rules:
+    - alert: Testalert
+      expr: vector(1)
+      labels:
+        severity: none
+      annotations:
+        message: This is an alert meant to ensure that the entire alerting pipeline is functional. 
