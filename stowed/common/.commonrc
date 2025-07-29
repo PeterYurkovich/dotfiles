@@ -22,6 +22,16 @@ alias kaf='kubectl apply -f'
 alias kdf='kubectl delete -f'
 
 alias lg='lazygit'
+alias gsc='git switch -c'
+alias gs='git switch'
+alias gsm='git switch main'
+alias gri='git rebase -i'
+alias gf='git fetch'
+alias gp='git pull'
+alias gmum='git merge upstream/main'
+alias gaa='git add .'
+alias gcm='git commit -m'
+alias gpo='git push origin'
 
 alias aws='aws --profile saml'
 
